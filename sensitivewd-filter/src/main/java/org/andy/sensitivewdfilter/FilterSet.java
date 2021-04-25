@@ -20,8 +20,9 @@ public class FilterSet{
 	}
 	
 	public void add(final int... no) {
-		for(int currNo : no)
+		for(int currNo : no) {
 			elements[currNo >>> 6] |= (1L << (currNo & 63));
+		}
 	}
 	
 	public void remove(final int no) {
@@ -61,11 +62,14 @@ public class FilterSet{
     }
 
 	public boolean containsAll(final int... no) {
-		if(no.length==0)
+		if(no.length==0) {
 			return true;
-		for(int currNo : no)
-			if((elements[currNo >>> 6] & (1L << (currNo & 63))) == 0)
+		}
+		for(int currNo : no) {
+			if((elements[currNo >>> 6] & (1L << (currNo & 63))) == 0) {
 				return false;
+			}
+		}
 		return true;
 	}
 	
@@ -80,9 +84,11 @@ public class FilterSet{
 			elements[currNo >>> 6] |= (1L << (currNo & 63));
 		}//这一步执行完跟循环调用contains差不多了
 		
-		for (int i = 0; i < elements.length; i++)
-			if ((elements[i] & ~this.elements[i]) != 0)
+		for (int i = 0; i < elements.length; i++) {
+			if ((elements[i] & ~this.elements[i]) != 0) {
 				return false;
+			}
+		}
 		return true;
 	}
 	
@@ -92,8 +98,9 @@ public class FilterSet{
 	 */
 	public int size() {
 		int size = 0;
-		for (long element : elements)
+		for (long element : elements) {
 			size += Long.bitCount(element);
+		}
 		return size;
 	}
 	
